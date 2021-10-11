@@ -23,7 +23,7 @@ public class OrderCreationUseCaseTest {
     private Category food = new Category() {{
         setName("food");
         setTaxPercentage(new BigDecimal("10"));
-    }};;
+    }};
     private final ProductCatalog productCatalog = new InMemoryProductCatalog(
             Arrays.<Product>asList(
                     new Product() {{
