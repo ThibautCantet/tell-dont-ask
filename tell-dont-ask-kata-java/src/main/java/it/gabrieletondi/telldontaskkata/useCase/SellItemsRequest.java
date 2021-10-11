@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SellItemsRequest {
-    private List<SellItemRequest> requests;
+    private final List<SellItemRequest> requests;
 
-    public void setRequests(List<SellItemRequest> requests) {
-        this.requests = requests;
+    public SellItemsRequest() {
+        requests = new ArrayList<>();
     }
 
     public List<SellItemRequest> getRequests() {
