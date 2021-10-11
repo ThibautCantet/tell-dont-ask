@@ -42,13 +42,9 @@ public class OrderCreationUseCaseTest {
 
     @Test
     public void sellMultipleItems() throws Exception {
-        SellItemRequest saladRequest = new SellItemRequest();
-        saladRequest.setProductName("salad");
-        saladRequest.setQuantity(2);
+        SellItemRequest saladRequest = new SellItemRequest(2, "salad");
 
-        SellItemRequest tomatoRequest = new SellItemRequest();
-        tomatoRequest.setProductName("tomato");
-        tomatoRequest.setQuantity(3);
+        SellItemRequest tomatoRequest = new SellItemRequest(3, "tomato");
 
         final SellItemsRequest request = new SellItemsRequest();
         request.setRequests(new ArrayList<>());
@@ -79,8 +75,7 @@ public class OrderCreationUseCaseTest {
     public void unknownProduct() throws Exception {
         SellItemsRequest request = new SellItemsRequest();
         request.setRequests(new ArrayList<>());
-        SellItemRequest unknownProductRequest = new SellItemRequest();
-        unknownProductRequest.setProductName("unknown product");
+        SellItemRequest unknownProductRequest = new SellItemRequest(0, "unknown product");
         request.getRequests().add(unknownProductRequest);
 
         useCase.run(request);

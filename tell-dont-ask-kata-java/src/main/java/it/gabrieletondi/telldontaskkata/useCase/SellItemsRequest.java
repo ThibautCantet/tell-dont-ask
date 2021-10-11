@@ -1,5 +1,6 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SellItemsRequest {
