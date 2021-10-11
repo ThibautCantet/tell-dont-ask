@@ -37,12 +37,4 @@ public class Product {
         return getUnitaryTaxedAmount().multiply(BigDecimal.valueOf(quantity)).setScale(2, HALF_UP);
     }
 
-    public OrderItem constructOrderItem(int quantity) {
-        final OrderItem orderItem = new OrderItem();
-        orderItem.setProduct(this);
-        orderItem.setQuantity(quantity);
-        orderItem.setTax(getUnitaryTax().multiply(BigDecimal.valueOf(quantity)));
-        orderItem.setTaxedAmount(getTaxedAmount(quantity));
-        return orderItem;
-    }
 }

@@ -26,7 +26,7 @@ public class OrderCreationUseCase {
 
         for (SellItemRequest itemRequest : request.getRequests()) {
             Product product = getProduct(itemRequest);
-            final OrderItem orderItem = product.constructOrderItem(itemRequest.getQuantity());
+            final OrderItem orderItem = new OrderItem(product, itemRequest.getQuantity());
 
             order.addItem(orderItem);
         }
