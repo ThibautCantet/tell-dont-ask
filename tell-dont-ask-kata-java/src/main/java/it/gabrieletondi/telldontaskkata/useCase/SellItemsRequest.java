@@ -4,10 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SellItemsRequest {
-    private final List<SellItemRequest> requests;
+    private List<SellItemRequest> requests;
 
-    public SellItemsRequest() {
+    private SellItemsRequest() {
         requests = new ArrayList<>();
+    }
+
+    public SellItemsRequest(List<SellItemRequest> sellItemRequests) {
+        this();
+        requests = sellItemRequests;
+    }
+
+    public SellItemsRequest(SellItemRequest unknownProductRequest) {
+        this();
+        requests.add(unknownProductRequest);
     }
 
     public List<SellItemRequest> getRequests() {
