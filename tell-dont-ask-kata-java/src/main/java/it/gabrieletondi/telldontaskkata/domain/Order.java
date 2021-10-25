@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.gabrieletondi.telldontaskkata.useCase.ApprovedOrderCannotBeRejectedException;
+import it.gabrieletondi.telldontaskkata.useCase.RejectedOrderCannotBeApprovedException;
+import it.gabrieletondi.telldontaskkata.useCase.ShippedOrdersCannotBeChangedException;
+
 public class Order {
     private BigDecimal total;
     private String currency;
@@ -18,6 +22,11 @@ public class Order {
         currency = "EUR";
         total = new BigDecimal("0.00");
         tax = new BigDecimal("0.00");
+    }
+
+    public Order(OrderStatus status, int orderId) {
+        this.id = orderId;
+        this.status = status;
     }
 
     public BigDecimal getTotal() {
@@ -48,14 +57,26 @@ public class Order {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void addItem(Product product, int quantity) {
         final OrderItem orderItem = new OrderItem(product, quantity);
         items.add(orderItem);
         total = total.add(orderItem.getTaxedAmount());
         tax = tax.add(orderItem.getTax());
+    }
+
+    public void approve(boolean approved) {
+        if (this.status.equals(OrderStatus.SHIPPED)) {
+            throw new ShippedOrdersCannotBeChangedException();
+        }
+
+        if (approved && this.status.equals(OrderStatus.REJECTED)) {
+            throw new RejectedOrderCannotBeApprovedException();
+        }
+
+        if (!approved && this.status.equals(OrderStatus.APPROVED)) {
+            throw new ApprovedOrderCannotBeRejectedException();
+        }
+
+        status = approved ? OrderStatus.APPROVED : OrderStatus.REJECTED;
     }
 }
