@@ -52,7 +52,8 @@ public class Order {
         this.id = id;
     }
 
-    public void addItem(OrderItem orderItem) {
+    public void addItem(Product product, int quantity) {
+        final OrderItem orderItem = new OrderItem(product, quantity);
         items.add(orderItem);
         total = total.add(orderItem.getTaxedAmount());
         tax = tax.add(orderItem.getTax());
